@@ -5,6 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 export default function BlogTemplate({ data }) {
+  // destructuring object markdownRemark key from data will be ASSIGNED for 'post' constant
   const { markdownRemark: post, previous, next } = data
   const siteTitle = data.site.siteMetadata?.title || `Title`
   return (
