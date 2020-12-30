@@ -1,11 +1,5 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
 const path = require("path")
+// API for looking where are the path, can be used for looking the blog template
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -29,6 +23,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // Get all markdown blog posts sorted by date
   const result = await graphql(`
+    # DO NOT USING 'query' STATEMENT FOR DEFINE QUERY
     {
       allMarkdownRemark(sort: { fields: [frontmatter___date], order: ASC }) {
         nodes {
@@ -61,7 +56,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
 
       createPage({
+        // path is shown in the route
         path: post.fields.slug,
+        // component is what template sould be used on creating page
         component: blogPost,
         context: {
           id: post.id,
